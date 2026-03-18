@@ -51,6 +51,17 @@ File deletion
 
 Output events to terminal
 
+Phase 3: Modular Architecture
+
+* Refactored code into separate modules
+* Introduced logging system (replaced print)
+* `monitor.py` handles events
+* `logger.py` handles output
+* `main.py` controls execution
+
+**Result:** Cleaner, scalable, and more professional structure
+
+
 How to Run
 cd watchdawg
 source venv/bin/activate
