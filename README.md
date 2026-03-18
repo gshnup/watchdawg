@@ -61,6 +61,16 @@ Phase 3: Modular Architecture
 
 **Result:** Cleaner, scalable, and more professional structure
 
+Phase 4: Configuration & File Logging
+
+* Added YAML-based configuration
+* Removed hardcoded values
+* Implemented file logging (`logs/app.log`)
+* System now configurable and persistent
+
+**Result:** Production-style, flexible system
+
+
 
 How to Run
 cd watchdawg

@@ -1,0 +1,3 @@
+watch_directory: "watch_dir"
+log_file: "logs/app.log"
+log_level: "INFO"
