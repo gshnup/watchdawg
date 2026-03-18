@@ -3,25 +3,26 @@ from watchdog.events import FileSystemEventHandler
 import time
 
 class Handler(FileSystemEventHandler):
+    def __init__(self, logger):
+        self.logger = logger
+
     def on_created(self, event):
-        print("Created:", event.src_path)
+        self.logger.info(f"Created: {event.src_path}")
 
     def on_deleted(self, event):
-        print("Deleted:", event.src_path)
+        self.logger.info(f"Deleted: {event.src_path}")
 
     def on_modified(self, event):
-        print("Modified:", event.src_path)
+        self.logger.info(f"Modified: {event.src_path}")
 
 
-def start():
-    path = "watch_dir"
-
-    event_handler = Handler()
+def start(path, logger):
+    event_handler = Handler(logger)
     observer = Observer()
     observer.schedule(event_handler, path, recursive=True)
 
     observer.start()
-    print("Watching:", path)
+    logger.info(f"Watching: {path}")
 
     try:
         while True:
