@@ -1,80 +1,113 @@
-WatchDawg 🐾
-Overview
+<div align="center">
 
-WatchDawg is a real-time directory monitoring system built using Python.
-It detects file changes and logs them instantly using an event-driven architecture.
+# 🐾 WatchDawg
 
-Features
+**Event-driven directory monitoring — real-time, structured, production-ready.**
 
-Real-time file monitoring (create, modify, delete)
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white)
+![Watchdog](https://img.shields.io/badge/Watchdog-4.0.1-FF6B6B?style=flat)
+![PyYAML](https://img.shields.io/badge/PyYAML-6.0-F5C518?style=flat)
+![Status](https://img.shields.io/badge/Status-Active-22C55E?style=flat)
 
-Modular architecture
+</div>
 
-Structured logging (console + file)
+---
 
-YAML-based configuration
+## What is WatchDawg?
 
-Persistent log storage
+WatchDawg watches any directory and instantly logs every file system event — creates, modifications, deletions, moves — using OS-level hooks (`inotify` on Linux, `FSEvents` on macOS) via the `watchdog` library.
 
-Tech Stack
+No polling. No CPU waste. Pure event-driven.
 
-Python
+> Built to demonstrate file system observability, modular Python architecture, and production-grade logging — core skills in any DevOps/SRE role.
 
-Watchdog
+---
 
-PyYAML
+## Features
 
-Logging module
+- ⚡ Event-driven — reacts instantly, not on a timer
+- 📂 Recursive directory watching
+- 🗂️ Dual logging — formatted console output + persistent log file
+- ⚙️ YAML-based config — zero hardcoded values
+- 🧱 Modular codebase — watcher, handler, logger cleanly separated
+- 🛑 Graceful shutdown on `Ctrl+C`
 
+---
 
+## Project Structure
+```
+watchdawg/
+├── main.py          # Entry point
+├── config.yaml      # All settings live here
+├── requirements.txt
+├── core/
+│   ├── watcher.py   # Observer lifecycle
+│   ├── handler.py   # Event processing
+│   └── logger.py    # Console + file logging
+└── logs/
+    └── watchdawg.log
+```
 
-Project Evolution
+---
 
-Phase 1: Setup
-
-Initialized Git and project structure
-
-Configured virtual environment and .gitignore
-
-Phase 2: Basic Monitoring
-
-Implemented real-time directory monitoring
-
-Detected file events using watchdog
-
-Phase 3: Architecture Refactor
-
-Modularized codebase
-
-Introduced structured logging system
-
-Phase 4: Production Upgrade
-
-Added YAML configuration
-
-Implemented file-based logging
-
-
-
-
-
-How to Run
+## Getting Started
+```bash
+git clone https://github.com/YOUR_USERNAME/watchdawg.git
 cd watchdawg
-source venv/bin/activate
+python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 python main.py
-Example Output
-INFO | Watching: watch_dir
-INFO | Created: watch_dir/test.txt
-INFO | Deleted: watch_dir/test.txt
+```
 
+Configure via `config.yaml`:
+```yaml
+watch:
+  path: ./watch_dir
+  recursive: true
+logging:
+  log_to_file: true
+  log_dir: ./logs
+```
 
-Future Improvements
+---
 
-CLI arguments support
+## Sample Output
+```
+2024-03-18 14:01:02 | INFO | WatchDawg started — Watching: ./watch_dir
+2024-03-18 14:01:15 | INFO | [CREATED ] [FILE] watch_dir/report.csv
+2024-03-18 14:01:43 | INFO | [MODIFIED] [FILE] watch_dir/config.yaml
+2024-03-18 14:02:10 | INFO | [DELETED ] [FILE] watch_dir/old_notes.txt
+```
 
-Docker containerization
+---
 
-Alert system (email/Slack)
+## How It Was Built
 
-Web dashboard
+| Phase | What happened |
+|---|---|
+| Foundation | Git setup, venv, project structure |
+| Core | `watchdog` Observer + event handler for CREATE / MODIFY / DELETE / MOVE |
+| Refactor | Broke monolithic script into `core/` modules |
+| Production | YAML config, persistent logging, graceful shutdown |
+
+---
+
+## Why This Matters in DevOps
+
+This pattern powers real tools — Filebeat watches directories to ship logs, CloudWatch Agent monitors for file changes, CI/CD pipelines trigger on artifact drops. WatchDawg is a ground-up implementation of that same primitive.
+
+---
+
+## Roadmap
+
+- [ ] CLI args (`--path`, `--interval`)
+- [ ] Periodic summary reports
+- [ ] Slack / email alerts
+- [ ] Docker support
+- [ ] Prometheus metrics + Grafana dashboard
+
+---
+
+<div align="center">
+  <sub>Part of a DevOps portfolio — built iteratively, documented intentionally</sub>
+</div>
