@@ -2,84 +2,79 @@ WatchDawg 🐾
 Overview
 
 WatchDawg is a real-time directory monitoring system built using Python.
-It observes file system changes and reacts instantly when files are created, modified, or deleted.
+It detects file changes and logs them instantly using an event-driven architecture.
 
-Objective
+Features
 
-The goal of this project is to understand and implement:
+Real-time file monitoring (create, modify, delete)
 
-Event-driven systems
+Modular architecture
 
-File system monitoring
+Structured logging (console + file)
 
-Clean project structuring
+YAML-based configuration
 
-DevOps-style tooling fundamentals
+Persistent log storage
 
 Tech Stack
 
 Python
 
-Watchdog (file system monitoring)
+Watchdog
 
-Project Status
+PyYAML
 
-🚧 In Progress — Built step-by-step with structured phases
+Logging module
 
-Phases
-Phase 1: Project Setup
 
-Initialized Git repository
 
-Set up virtual environment
+Project Evolution
 
-Created project structure
+Phase 1: Setup
 
-Configured .gitignore
+Initialized Git and project structure
 
-Phase 2: Basic Monitoring System
+Configured virtual environment and .gitignore
 
-Implemented real-time file monitoring using watchdog
+Phase 2: Basic Monitoring
 
-Detected:
+Implemented real-time directory monitoring
 
-File creation
+Detected file events using watchdog
 
-File modification
+Phase 3: Architecture Refactor
 
-File deletion
+Modularized codebase
 
-Output events to terminal
+Introduced structured logging system
 
-Phase 3: Modular Architecture
+Phase 4: Production Upgrade
 
-* Refactored code into separate modules
-* Introduced logging system (replaced print)
-* `monitor.py` handles events
-* `logger.py` handles output
-* `main.py` controls execution
+Added YAML configuration
 
-**Result:** Cleaner, scalable, and more professional structure
+Implemented file-based logging
 
-Phase 4: Configuration & File Logging
 
-* Added YAML-based configuration
-* Removed hardcoded values
-* Implemented file logging (`logs/app.log`)
-* System now configurable and persistent
-
-**Result:** Production-style, flexible system
 
 
 
 How to Run
 cd watchdawg
 source venv/bin/activate
+pip install -r requirements.txt
 python main.py
+Example Output
+INFO | Watching: watch_dir
+INFO | Created: watch_dir/test.txt
+INFO | Deleted: watch_dir/test.txt
 
-In another terminal:
 
-cd watchdawg/watch_dir
-touch test.txt
-echo "hello" >> test.txt
-rm test.txt
+Future Improvements
+
+CLI arguments support
+
+Docker containerization
+
+Alert system (email/Slack)
+
+Web dashboard
